@@ -22,7 +22,7 @@ class GroupTestState extends State<GroupTest> {
           SizedBox(
             width: width1,
             height: 100,
-            child: AutoSizeText(
+            child: AutoSizeTextWithBackground(
               'XXXXXX',
               style: TextStyle(fontSize: 60),
               minFontSize: 1,
@@ -33,7 +33,7 @@ class GroupTestState extends State<GroupTest> {
           SizedBox(
             width: width2,
             height: 100.0,
-            child: AutoSizeText(
+            child: AutoSizeTextWithBackground(
               'XXXXXX',
               style: TextStyle(fontSize: 60),
               minFontSize: 1,

@@ -11,7 +11,7 @@ void main() {
       expectedFontSize: 20,
       widget: SizedBox(
         width: 100,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXX',
           style: TextStyle(fontSize: 60),
           maxLines: 1,
@@ -24,7 +24,7 @@ void main() {
       expectedFontSize: 17,
       widget: SizedBox(
         width: 85,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXX',
           style: TextStyle(fontSize: 200),
           maxLines: 1,
@@ -37,7 +37,7 @@ void main() {
       expectedFontSize: 1,
       widget: SizedBox(
         width: 6,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXX',
           style: TextStyle(fontSize: 20),
           maxLines: 1,
@@ -51,7 +51,7 @@ void main() {
       expectedFontSize: 20,
       widget: SizedBox(
         width: 100,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXX XXXXX XXXXX',
           style: TextStyle(fontSize: 30),
           maxLines: 3,
@@ -66,7 +66,7 @@ void main() {
       expectedFontSize: 30,
       widget: SizedBox(
         height: 30,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXX',
           style: TextStyle(fontSize: 60),
           maxLines: 1,
@@ -80,7 +80,7 @@ void main() {
       widget: SizedBox(
         width: 120,
         height: 60,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXXX',
           style: TextStyle(fontSize: 200),
           maxLines: 2,
@@ -94,7 +94,7 @@ void main() {
       widget: SizedBox(
         width: 120,
         height: 141,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XX XX XX',
           style: TextStyle(fontSize: 200),
           maxLines: 3,
@@ -110,7 +110,7 @@ void main() {
       widget: SizedBox(
         width: 201,
         height: 40,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXXX',
           style: TextStyle(fontSize: 33.5),
           maxLines: 1,
@@ -125,7 +125,7 @@ void main() {
       widget: SizedBox(
         width: 200.9,
         height: 40,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXXX',
           style: TextStyle(fontSize: 33.5),
           maxLines: 1,

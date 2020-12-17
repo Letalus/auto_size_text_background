@@ -8,7 +8,7 @@ import 'utils.dart';
 void main() {
   testWidgets('Forces valid min and max fontSize', (tester) async {
     await tester.pumpWidget(
-      AutoSizeText(
+      AutoSizeTextWithBackground(
         'AutoSizeText Test',
         style: TextStyle(fontSize: 25),
         minFontSize: -1,
@@ -17,7 +17,7 @@ void main() {
     expect(tester.takeException(), isAssertionError);
 
     await tester.pumpWidget(
-      AutoSizeText(
+      AutoSizeTextWithBackground(
         'AutoSizeText Test',
         style: TextStyle(fontSize: 25),
         maxFontSize: 0,
@@ -26,7 +26,7 @@ void main() {
     expect(tester.takeException(), isAssertionError);
 
     await tester.pumpWidget(
-      AutoSizeText(
+      AutoSizeTextWithBackground(
         'AutoSizeText Test',
         style: TextStyle(fontSize: 25),
         minFontSize: 20,
@@ -43,7 +43,7 @@ void main() {
       widget: SizedBox(
         width: 10,
         height: 10,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'AutoSizeText Test',
           style: TextStyle(fontSize: 25),
           minFontSize: 15,
@@ -59,7 +59,7 @@ void main() {
       widget: SizedBox(
         width: 120,
         height: 40,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXX',
           style: TextStyle(fontSize: 30, fontFamily: 'Roboto'),
           minFontSize: 15,
@@ -74,7 +74,7 @@ void main() {
       expectedFontSize: 20,
       widget: DefaultTextStyle(
         style: TextStyle(fontSize: 30),
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'AutoSizeText Test',
           maxFontSize: 20,
         ),
@@ -84,7 +84,7 @@ void main() {
     await pumpAndExpectFontSize(
       tester: tester,
       expectedFontSize: 20,
-      widget: AutoSizeText(
+      widget: AutoSizeTextWithBackground(
         'AutoSizeText Test',
         style: TextStyle(fontSize: 30),
         maxFontSize: 20,
@@ -94,7 +94,7 @@ void main() {
     await pumpAndExpectFontSize(
       tester: tester,
       expectedFontSize: 20,
-      widget: AutoSizeText(
+      widget: AutoSizeTextWithBackground(
         'AutoSizeText Test',
         style: TextStyle(fontSize: 20),
         maxFontSize: 30,

@@ -8,14 +8,14 @@ void main() {
   testWidgets('Only Text', (tester) async {
     await pump(
       tester: tester,
-      widget: AutoSizeText('Some Text'),
+      widget: AutoSizeTextWithBackground('Some Text'),
     );
   });
 
   testWidgets('Only text (rich)', (tester) async {
     await pump(
       tester: tester,
-      widget: AutoSizeText.rich(TextSpan(text: 'Some Text')),
+      widget: AutoSizeTextWithBackground.rich(TextSpan(text: 'Some Text')),
     );
   });
 
@@ -23,7 +23,7 @@ void main() {
     await pumpAndExpectFontSize(
       tester: tester,
       expectedFontSize: 34,
-      widget: AutoSizeText(
+      widget: AutoSizeTextWithBackground(
         'Some Text',
         style: TextStyle(fontSize: 34),
       ),
@@ -34,7 +34,7 @@ void main() {
     await pumpAndExpectFontSize(
       tester: tester,
       expectedFontSize: 35,
-      widget: AutoSizeText.rich(
+      widget: AutoSizeTextWithBackground.rich(
         TextSpan(text: 'Some Text'),
         style: TextStyle(fontSize: 35),
       ),
@@ -54,7 +54,7 @@ void main() {
         softWrap: false,
         overflow: TextOverflow.ellipsis,
         maxLines: 17,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'AutoSizeText Test',
         ),
       ),
@@ -73,7 +73,7 @@ void main() {
     await pumpAndExpectFontSize(
       tester: tester,
       expectedFontSize: 60,
-      widget: AutoSizeText(
+      widget: AutoSizeTextWithBackground(
         'Some Text',
         style: TextStyle(fontSize: 15),
         textScaleFactor: 4,
@@ -85,7 +85,7 @@ void main() {
     final textKey = GlobalKey();
     final text = await pumpAndGetText(
       tester: tester,
-      widget: AutoSizeText(
+      widget: AutoSizeTextWithBackground(
         'A text with key',
         textKey: textKey,
       ),

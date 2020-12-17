@@ -11,7 +11,7 @@ void main() {
       widget: SizedBox(
         width: 100,
         height: 20,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXXX',
           overflowReplacement: Text('OVERFLOW!'),
           minFontSize: 20,
@@ -28,7 +28,7 @@ void main() {
       widget: SizedBox(
         width: 100,
         height: 20,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXX',
           style: TextStyle(fontSize: 20),
           overflowReplacement: Text('OVERFLOW!'),

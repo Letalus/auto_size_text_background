@@ -11,7 +11,7 @@ void main() {
       expectedFontSize: 20,
       widget: SizedBox(
         width: 100,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXX XXXXX',
           style: TextStyle(fontSize: 25),
           wrapWords: false,
@@ -26,7 +26,7 @@ void main() {
       expectedFontSize: 10,
       widget: SizedBox(
         width: 40,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXX',
           style: TextStyle(fontSize: 25),
           minFontSize: 10,
@@ -45,7 +45,7 @@ void main() {
       expectedFontSize: 30,
       widget: SizedBox(
         width: 90,
-        child: AutoSizeText(
+        child: AutoSizeTextWithBackground(
           'XXXXXX',
           style: TextStyle(fontSize: 40),
           maxLines: 2,

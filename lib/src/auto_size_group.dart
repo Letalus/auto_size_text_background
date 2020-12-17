@@ -2,15 +2,15 @@ part of auto_size_text;
 
 /// Controller to synchronize the fontSize of multiple AutoSizeTexts.
 class AutoSizeGroup {
-  final _listeners = <_AutoSizeTextState, double>{};
+  final _listeners = <_AutoSizeTextWithBackgroundState, double>{};
   var _widgetsNotified = false;
   var _fontSize = double.infinity;
 
-  void _register(_AutoSizeTextState text) {
+  void _register(_AutoSizeTextWithBackgroundState text) {
     _listeners[text] = double.infinity;
   }
 
-  void _updateFontSize(_AutoSizeTextState text, double maxFontSize) {
+  void _updateFontSize(_AutoSizeTextWithBackgroundState text, double maxFontSize) {
     final oldFontSize = _fontSize;
     if (maxFontSize <= _fontSize) {
       _fontSize = maxFontSize;
@@ -45,7 +45,7 @@ class AutoSizeGroup {
     }
   }
 
-  void _remove(_AutoSizeTextState text) {
+  void _remove(_AutoSizeTextWithBackgroundState text) {
     _updateFontSize(text, double.infinity);
     _listeners.remove(text);
   }
