@@ -33,6 +33,8 @@ class AutoSizeTextWithBackground extends StatefulWidget {
     this.maxLines,
     this.semanticsLabel,
     this.backgroundColor,
+    this.backgroundBorderRadius,
+    this.backgroundTextPadding,
   })  : textSpan = null,
         super(key: key);
 
@@ -59,6 +61,8 @@ class AutoSizeTextWithBackground extends StatefulWidget {
     this.maxLines,
     this.semanticsLabel,
     this.backgroundColor,
+    this.backgroundBorderRadius,
+    this.backgroundTextPadding,
   })  : data = null,
         super(key: key);
 
@@ -217,7 +221,20 @@ class AutoSizeTextWithBackground extends StatefulWidget {
   /// ```
   final String? semanticsLabel;
 
+  ///Background color of the text
   final Color? backgroundColor;
+
+  ///Radius for the background box
+  ///
+  /// Will be ignored if backgroundColor is null
+  /// Defaults to BorderRadius.circular(20)
+  final BorderRadius? backgroundBorderRadius;
+
+  ///Padding for the background radius box
+  ///
+  /// Will be ignored if backgroundColor is null
+  /// Defaults to EdgeInsets.all(8)
+  final EdgeInsets? backgroundTextPadding;
 
   @override
   _AutoSizeTextWithBackgroundState createState() => _AutoSizeTextWithBackgroundState();
@@ -262,13 +279,16 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
       final fontSize = result[0] as double;
       final textFits = result[1] as bool;
 
+      final lineMetrics = widget.backgroundColor != null ? _calculateLineMetric(size, style.copyWith(fontSize: fontSize), maxLines) : null;
+      print('lineMetrics: ${lineMetrics?.map((e) => e)}');
+
       Widget text;
 
       if (widget.group != null) {
         widget.group!._updateFontSize(this, fontSize);
         text = _buildText(widget.group!._fontSize, style, maxLines);
       } else {
-        text = _buildText(fontSize, style, maxLines);
+        text = _buildText(fontSize, style, maxLines, lineMetrics: lineMetrics);
       }
 
       if (widget.overflowReplacement != null && !textFits) {
@@ -404,9 +424,34 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
         textPainter.width > constraints.maxWidth);
   }
 
-  Widget _buildText(double fontSize, TextStyle style, int? maxLines) {
+  List<LineMetrics> _calculateLineMetric(BoxConstraints size, TextStyle? style, int? maxLines) {
+
+    final userScale = widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
+
+    final span = TextSpan(
+      style: style as TextStyle,
+      text: widget.textSpan?.text ?? widget.data,
+      children: widget.textSpan?.children,
+      recognizer: widget.textSpan?.recognizer,
+    );
+
+    final textPainter = TextPainter(
+      text: span,
+      textAlign: widget.textAlign ?? TextAlign.left,
+      textDirection: widget.textDirection ?? TextDirection.ltr,
+      textScaleFactor: userScale,
+      maxLines: maxLines,
+      locale: widget.locale,
+      strutStyle: widget.strutStyle,
+    );
+
+    textPainter.layout(maxWidth: size.maxWidth);
+    return textPainter.computeLineMetrics();
+  }
+
+  Widget _buildText(double fontSize, TextStyle style, int? maxLines, {List<LineMetrics>? lineMetrics}) {
     if (widget.data != null) {
-      return Text(
+      final text = Text(
         widget.data!,
         key: widget.textKey,
         style: style.copyWith(fontSize: fontSize),
@@ -420,6 +465,19 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
         maxLines: maxLines,
         semanticsLabel: widget.semanticsLabel,
       );
+
+      if (widget.backgroundColor != null && lineMetrics != null) {
+        return CustomPaint(
+          painter: AutoSizeTextPainter(
+              lineMetrics: lineMetrics,
+              backgroundColor: widget.backgroundColor ?? const Color(0x00FFFFFF),
+              padding: widget.backgroundTextPadding ?? const EdgeInsets.all(8),
+          borderRadius: widget.backgroundBorderRadius ?? const BorderRadius.all(Radius.circular(20))),
+          child: text,
+        );
+      }
+
+      return text;
     } else {
       return Text.rich(
         widget.textSpan!,
