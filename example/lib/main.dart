@@ -14,17 +14,21 @@ class App extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(50),
             child: AutoSizeTextWithBackground(
-              'This string will be automatically resized to'
+              'This\n string\n will be automatically resized to\n'
                   'asdf sdf sdf sdfs dfsdfs dfasdf asdf asdf asdf '
+                  'This string will be automatically resized to'
+                  'asdf sdf sdf sdfs dfsdfs dfasdf asdf asdf asdf '
+                  'This string will be automatically resized to'
+                  'asdf sdf sdf sdfs dfsdfs dfasdf asdf \nasdf asdf '
               ,
               style: TextStyle(fontSize: 50),
-              maxFontSize: 50,
+              maxFontSize: 40,
               minFontSize: 5,
-              backgroundColor: Colors.yellow[700],
-              textAlign: TextAlign.justify,
-              backgroundRadius: Radius.circular(20),
-              backgroundTextPadding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-              maxLines: 8,
+              backgroundColor: Colors.red[300],
+              textAlign: TextAlign.left,
+              backgroundRadius: Radius.circular(10),
+              backgroundTextPadding: EdgeInsets.all(5),
+              maxLines: 14,
             ),
           ),
         ),
