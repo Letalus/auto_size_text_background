@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 class AutoSizeTextPainter extends CustomPainter {
   final List<LineMetrics> lineMetrics;
   final Color backgroundColor;
+
+  ///Capped to lineHeight*.3
+  /// Any larger borderRadius will be ignored
   final Radius radius;
   final EdgeInsets padding;
   final TextAlign textAlign;
@@ -23,7 +26,7 @@ class AutoSizeTextPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final _paint = Paint()
       ..color = backgroundColor
-      ..style = PaintingStyle.stroke;
+      ..style = PaintingStyle.fill;
 
     final _defaultArcVal = radius.x<lineMetrics.first.height*0.3?radius.x:lineMetrics.first.height*0.3;
 
@@ -49,6 +52,7 @@ class AutoSizeTextPainter extends CustomPainter {
         baseline: lineMetrics.last.baseline,
         unscaledAscent: lineMetrics.last.unscaledAscent);
 
+    //Draw paths depending on the textAlign property
     switch (textAlign) {
       case TextAlign.left:
       case TextAlign.start:
@@ -99,6 +103,7 @@ class AutoSizeTextPainter extends CustomPainter {
 
       final _arcTopY = _arcTopOffset.dy;
       final _arcTopX = _arcTopOffset.dx;
+
       final _arcBottomY = _arcBottomOffset.dy;
       final _arcBottomX = _arcBottomOffset.dx;
 
@@ -158,6 +163,8 @@ class AutoSizeTextPainter extends CustomPainter {
       }
     }
   }
+
+
 
   Offset _getArcTopValues(
       bool _isTopArcClockWise, LineMetrics firstLineMetric, LineMetrics secondLineMetric, double _defaultArcVal) {
