@@ -25,7 +25,7 @@ class AutoSizeTextPainter extends CustomPainter {
       ..color = backgroundColor
       ..style = PaintingStyle.stroke;
 
-    final _defaultArcVal = radius.x;
+    final _defaultArcVal = radius.x<lineMetrics.first.height*0.3?radius.x:lineMetrics.first.height*0.3;
 
     ///Top and bottom lineMetrics are need to draw the start and end correctly
     final _originLineMetric = LineMetrics(
@@ -230,20 +230,20 @@ class AutoSizeTextPainter extends CustomPainter {
       case TextAlign.start:
         _backgroundPath.lineTo(_defaultArcVal - padding.left, _lineBottomY);
         _backgroundPath.arcToPoint(Offset(-padding.left, _lineBottomY - _defaultArcVal),
-            radius: Radius.circular(20), clockwise: false);
+            radius: radius, clockwise: true);
         _backgroundPath.lineTo(-padding.left, _defaultArcVal - padding.top);
         _backgroundPath.arcToPoint(Offset(-padding.left + _defaultArcVal, -padding.top),
-            radius: Radius.circular(20), clockwise: false);
+            radius: radius, clockwise: true);
         _backgroundPath.close();
         break;
       case TextAlign.right:
       case TextAlign.end:
         _backgroundPath.lineTo(widgetSize.width + padding.right - _defaultArcVal, _lineBottomY);
         _backgroundPath.arcToPoint(Offset(widgetSize.width + padding.right, _lineBottomY - _defaultArcVal),
-            radius: Radius.circular(20), clockwise: false);
+            radius: radius, clockwise: false);
         _backgroundPath.lineTo(widgetSize.width + padding.right, _defaultArcVal - padding.top);
         _backgroundPath.arcToPoint(Offset(widgetSize.width + padding.right - _defaultArcVal, -padding.top),
-            radius: Radius.circular(20), clockwise: false);
+            radius: radius, clockwise: false);
         _backgroundPath.close();
         break;
       case TextAlign.center:
