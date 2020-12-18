@@ -33,7 +33,7 @@ class AutoSizeTextWithBackground extends StatefulWidget {
     this.maxLines,
     this.semanticsLabel,
     this.backgroundColor,
-    this.backgroundBorderRadius,
+    this.backgroundRadius,
     this.backgroundTextPadding,
   })  : textSpan = null,
         super(key: key);
@@ -61,7 +61,7 @@ class AutoSizeTextWithBackground extends StatefulWidget {
     this.maxLines,
     this.semanticsLabel,
     this.backgroundColor,
-    this.backgroundBorderRadius,
+    this.backgroundRadius,
     this.backgroundTextPadding,
   })  : data = null,
         super(key: key);
@@ -228,7 +228,7 @@ class AutoSizeTextWithBackground extends StatefulWidget {
   ///
   /// Will be ignored if backgroundColor is null
   /// Defaults to BorderRadius.circular(20)
-  final BorderRadius? backgroundBorderRadius;
+  final Radius? backgroundRadius;
 
   ///Padding for the background radius box
   ///
@@ -279,7 +279,9 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
       final fontSize = result[0] as double;
       final textFits = result[1] as bool;
 
-      final lineMetrics = widget.backgroundColor != null ? _calculateLineMetric(size, style.copyWith(fontSize: fontSize), maxLines) : null;
+      final lineMetrics = widget.backgroundColor != null
+          ? _calculateLineMetric(size, style.copyWith(fontSize: fontSize), maxLines)
+          : null;
       print('lineMetrics: ${lineMetrics?.map((e) => e)}');
 
       Widget text;
@@ -425,7 +427,6 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
   }
 
   List<LineMetrics> _calculateLineMetric(BoxConstraints size, TextStyle? style, int? maxLines) {
-
     final userScale = widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
 
     final span = TextSpan(
@@ -469,10 +470,12 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
       if (widget.backgroundColor != null && lineMetrics != null) {
         return CustomPaint(
           painter: AutoSizeTextPainter(
-              lineMetrics: lineMetrics,
-              backgroundColor: widget.backgroundColor ?? const Color(0x00FFFFFF),
-              padding: widget.backgroundTextPadding ?? const EdgeInsets.all(8),
-          borderRadius: widget.backgroundBorderRadius ?? const BorderRadius.all(Radius.circular(20))),
+            lineMetrics: lineMetrics,
+            backgroundColor: widget.backgroundColor ?? const Color(0x00FFFFFF),
+            padding: widget.backgroundTextPadding ?? const EdgeInsets.all(8),
+            radius: widget.backgroundRadius ?? const Radius.circular(20),
+            textAlign: widget.textAlign??TextAlign.center
+          ),
           child: text,
         );
       }

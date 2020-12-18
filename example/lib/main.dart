@@ -16,16 +16,14 @@ class App extends StatelessWidget {
             child: AutoSizeTextWithBackground(
               'This string will be automatically resized to'
                   'asdf sdf sdf sdfs dfsdfs dfasdf asdf asdf asdf '
-                  'as dfas dfs dfa sf asd fas dd s df sdf as f'
-                  ' fit in two lines. ASDfasdflsdfk jasöfdljk askdöfj aksdfj asödfkjkskföj'
               ,
               style: TextStyle(fontSize: 50),
               maxFontSize: 50,
               minFontSize: 5,
               backgroundColor: Colors.yellow[700],
-              textAlign: TextAlign.center,
-              backgroundBorderRadius: BorderRadius.circular(15),
-              backgroundTextPadding: EdgeInsets.all(20),
+              textAlign: TextAlign.justify,
+              backgroundRadius: Radius.circular(20),
+              backgroundTextPadding: EdgeInsets.fromLTRB(20, 5, 20, 5),
               maxLines: 8,
             ),
           ),
