@@ -282,7 +282,6 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
       final lineMetrics = widget.backgroundColor != null
           ? _calculateLineMetric(size, style.copyWith(fontSize: fontSize), maxLines)
           : null;
-      print('lineMetrics: ${lineMetrics?.map((e) => e)}');
 
       Widget text;
 
