@@ -1,4 +1,4 @@
-part of auto_size_text;
+part of auto_size_text_background;
 
 /// Flutter widget that automatically resizes text to fit perfectly within its
 /// bounds.
@@ -132,9 +132,9 @@ class AutoSizeTextWithBackground extends StatefulWidget {
   /// Synchronizes the size of multiple [AutoSizeTextWithBackground]s.
   ///
   /// If you want multiple [AutoSizeTextWithBackground]s to have the same text size, give all
-  /// of them the same [AutoSizeGroup] instance. All of them will have the
+  /// of them the same [AutoSizeGroupBackground] instance. All of them will have the
   /// size of the smallest [AutoSizeTextWithBackground]
-  final AutoSizeGroup? group;
+  final AutoSizeGroupBackground? group;
 
   /// How the text should be aligned horizontally.
   final TextAlign? textAlign;

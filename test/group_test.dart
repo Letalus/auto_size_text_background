@@ -1,4 +1,4 @@
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:auto_size_text_background/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -10,7 +10,7 @@ class GroupTest extends StatefulWidget {
 }
 
 class GroupTestState extends State<GroupTest> {
-  var group = AutoSizeGroup();
+  var group = AutoSizeGroupBackground();
   var width1 = 300.0;
   var width2 = 300.0;
 

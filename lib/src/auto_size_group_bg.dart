@@ -1,7 +1,7 @@
-part of auto_size_text;
+part of auto_size_text_background;
 
 /// Controller to synchronize the fontSize of multiple AutoSizeTexts.
-class AutoSizeGroup {
+class AutoSizeGroupBackground {
   final _listeners = <_AutoSizeTextWithBackgroundState, double>{};
   var _widgetsNotified = false;
   var _fontSize = double.infinity;
