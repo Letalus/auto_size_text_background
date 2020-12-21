@@ -14,20 +14,15 @@ class App extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(50),
             child: AutoSizeTextWithBackground(
-              'This\n string\n will be automatically darts resized \n'
-                  'asdf sdf sdf sdfs dfsdf'
-                  'asdf sdf sdf sdfs \ndfsdfs dfasdf asdf asdf asdf '
+              'This\n string\n will bedfsdfs dfasdf asdf asdf asdf '
                   'This string will be automatically resized to'
-                  'asdf sdf sdf sdfs dfsdfs dfasdf asdf \nasdf asdf '
-              ,
+                  'asdf sdf sIsdf sdfs dfsdfs dfaxsdf asd',
               style: TextStyle(fontSize: 50),
-              maxFontSize: 40,
               minFontSize: 5,
               backgroundColor: Colors.blue[300],
               textAlign: TextAlign.center,
               backgroundRadius: Radius.circular(10),
-              backgroundTextPadding: EdgeInsets.all(5),
-              maxLines: 14,
+              backgroundTextPadding: EdgeInsets.all(20),
             ),
           ),
         ),

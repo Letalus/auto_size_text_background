@@ -107,6 +107,8 @@ class AutoSizeTextPainter extends CustomPainter {
       final _arcBottomY = _arcBottomOffset.dy;
       final _arcBottomX = _arcBottomOffset.dx;
 
+      final _shouldFirstLineBeShown = _getShouldFirstLineBeShown(_previousLine, lineMetric, _defaultArcVal, _isTopArcClockWise);
+
       if (i == 0) {
         _drawOriginPath(widgetSize, _defaultArcVal, _lineTopY);
       }
@@ -147,6 +149,8 @@ class AutoSizeTextPainter extends CustomPainter {
       final _arcBottomY = _arcBottomOffset.dy;
       final _arcBottomX = _arcBottomOffset.dx;
 
+      final _shouldFirstLineBeShown = _getShouldFirstLineBeShown(_previousLine, lineMetric, _defaultArcVal, _isTopArcClockWise);
+
       if (i == 0) {
         _drawOriginPath(widgetSize, _defaultArcVal, _lineTopY);
       }
@@ -164,17 +168,27 @@ class AutoSizeTextPainter extends CustomPainter {
     }
   }
 
+  bool _getShouldFirstLineBeShown(LineMetrics firstLine, LineMetrics secondLine, double _defaultArcVal, bool _isTopArcClockWise){
+    var _lineDifference = (firstLine.width-secondLine.width)/2;
+    if(_lineDifference<0)_lineDifference *=-1;
+    if(_lineDifference>_defaultArcVal*2){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 
 
   Offset _getArcTopValues(
       bool _isTopArcClockWise, LineMetrics firstLineMetric, LineMetrics secondLineMetric, double _defaultArcVal) {
-    double _arcTopX = 0;
-    double _arcTopY = 0;
+    var _arcTopX = 0.0;
+    var _arcTopY = 0.0;
     if (_isTopArcClockWise) {
       final _currentToPreviousLineDifference = (firstLineMetric.width - secondLineMetric.width) / 2;
       final isTopLineSmallerAsDefaultArc = _defaultArcVal > _currentToPreviousLineDifference;
       if (isTopLineSmallerAsDefaultArc) {
-        _arcTopY = _currentToPreviousLineDifference;
+        _arcTopY = _currentToPreviousLineDifference/2;
       } else {
         _arcTopY = _defaultArcVal;
       }
@@ -183,7 +197,7 @@ class AutoSizeTextPainter extends CustomPainter {
       final _previousToCurrentLineDifference = (secondLineMetric.width - firstLineMetric.width) / 2;
       final isTopLineSmallerAsDefaultArc = _defaultArcVal > _previousToCurrentLineDifference;
       if (isTopLineSmallerAsDefaultArc) {
-        _arcTopX = _previousToCurrentLineDifference;
+        _arcTopX = _previousToCurrentLineDifference/2;
       } else {
         _arcTopX = _defaultArcVal;
       }
@@ -195,18 +209,26 @@ class AutoSizeTextPainter extends CustomPainter {
 
   Offset _getArcBottomValues(
       bool _isBottomArcClockWise, LineMetrics firstLineMetric, LineMetrics secondLineMetric, double _defaultArcVal) {
-    var _arcBottomY = _defaultArcVal;
-    var _arcBottomX = _defaultArcVal;
+    var _arcBottomY = 0.0;
+    var _arcBottomX = 0.0;
 
     if (_isBottomArcClockWise) {
       final _currentToNextLineDifference = (firstLineMetric.width - secondLineMetric.width) / 2;
       final isBottomLineSmallerAsDefaultArc = _defaultArcVal > _currentToNextLineDifference;
-      if (isBottomLineSmallerAsDefaultArc) _arcBottomY = _currentToNextLineDifference;
+      if (isBottomLineSmallerAsDefaultArc) {
+        _arcBottomY = _currentToNextLineDifference / 2;
+      } else{
+        _arcBottomY = _defaultArcVal;
+      }
       _arcBottomX = 0;
     } else {
       final _currentToNextLineDifference = (secondLineMetric.width - firstLineMetric.width) / 2;
       final isBottomLineSmallerAsDefaultArc = _defaultArcVal > _currentToNextLineDifference;
-      if (isBottomLineSmallerAsDefaultArc) _arcBottomX = _currentToNextLineDifference;
+      if (isBottomLineSmallerAsDefaultArc) {
+        _arcBottomX = _currentToNextLineDifference / 2;
+      }else{
+        _arcBottomX = _defaultArcVal;
+      }
       _arcBottomY = 0;
     }
 
