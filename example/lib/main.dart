@@ -21,7 +21,7 @@ class App extends StatelessWidget {
               minFontSize: 5,
               backgroundColor: Colors.blue[300],
               textAlign: TextAlign.center,
-              backgroundRadius: Radius.circular(10),
+              backgroundRadius: Radius.circular(40),
               backgroundTextPadding: EdgeInsets.all(20),
             ),
           ),

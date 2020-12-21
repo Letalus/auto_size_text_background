@@ -28,7 +28,7 @@ class AutoSizeTextPainter extends CustomPainter {
       ..color = backgroundColor
       ..style = PaintingStyle.fill;
 
-    final _defaultArcVal = radius.x<lineMetrics.first.height*0.3?radius.x:lineMetrics.first.height*0.3;
+    final _defaultArcVal = radius.x<lineMetrics.first.height*0.2?radius.x:lineMetrics.first.height*0.2;
 
     ///Top and bottom lineMetrics are need to draw the start and end correctly
     final _originLineMetric = LineMetrics(
