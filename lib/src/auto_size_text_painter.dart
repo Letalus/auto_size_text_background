@@ -79,7 +79,7 @@ class AutoSizeTextPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+    return oldDelegate!=this;
   }
 
   void _drawLeftPath(
