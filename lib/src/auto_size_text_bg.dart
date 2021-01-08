@@ -276,7 +276,6 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
       _validateProperties(style, maxLines);
 
       final result = _calculateFontSize(size, style, maxLines);
-      print('result: $result, size: $size');
       final fontSize = result[0] as double;
       final textFits = result[1] as bool;
 
@@ -451,6 +450,7 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
   }
 
   Widget _buildText(double fontSize, TextStyle style, int? maxLines, {List<LineMetrics>? lineMetrics}) {
+    final userScale = widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
     if (widget.data != null) {
       final text = Text(
         widget.data!,
@@ -463,6 +463,7 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
         softWrap: widget.softWrap,
         overflow: widget.overflow,
         maxLines: maxLines,
+        textScaleFactor: userScale,
         semanticsLabel: widget.semanticsLabel,
       );
 
