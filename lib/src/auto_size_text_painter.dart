@@ -107,8 +107,6 @@ class AutoSizeTextPainter extends CustomPainter {
       final _arcBottomY = _arcBottomOffset.dy;
       final _arcBottomX = _arcBottomOffset.dx;
 
-      final _shouldFirstLineBeShown = _getShouldFirstLineBeShown(_previousLine, lineMetric, _defaultArcVal, _isTopArcClockWise);
-
       if (i == 0) {
         _drawOriginPath(widgetSize, _defaultArcVal, _lineTopY);
       }
@@ -149,8 +147,6 @@ class AutoSizeTextPainter extends CustomPainter {
       final _arcBottomY = _arcBottomOffset.dy;
       final _arcBottomX = _arcBottomOffset.dx;
 
-      final _shouldFirstLineBeShown = _getShouldFirstLineBeShown(_previousLine, lineMetric, _defaultArcVal, _isTopArcClockWise);
-
       if (i == 0) {
         _drawOriginPath(widgetSize, _defaultArcVal, _lineTopY);
       }
@@ -165,16 +161,6 @@ class AutoSizeTextPainter extends CustomPainter {
       if (i == lineMetrics.length - 1) {
         _drawFinishPath(widgetSize, _defaultArcVal, _lineTopY, _lineBottomY);
       }
-    }
-  }
-
-  bool _getShouldFirstLineBeShown(LineMetrics firstLine, LineMetrics secondLine, double _defaultArcVal, bool _isTopArcClockWise){
-    var _lineDifference = (firstLine.width-secondLine.width)/2;
-    if(_lineDifference<0)_lineDifference *=-1;
-    if(_lineDifference>_defaultArcVal*2){
-      return true;
-    }else{
-      return false;
     }
   }
 

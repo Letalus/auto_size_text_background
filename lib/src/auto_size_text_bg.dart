@@ -276,6 +276,7 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
       _validateProperties(style, maxLines);
 
       final result = _calculateFontSize(size, style, maxLines);
+      print('result: $result, size: $size');
       final fontSize = result[0] as double;
       final textFits = result[1] as bool;
 
@@ -461,7 +462,6 @@ class _AutoSizeTextWithBackgroundState extends State<AutoSizeTextWithBackground>
         locale: widget.locale,
         softWrap: widget.softWrap,
         overflow: widget.overflow,
-        textScaleFactor: 1,
         maxLines: maxLines,
         semanticsLabel: widget.semanticsLabel,
       );

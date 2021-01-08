@@ -11,18 +11,21 @@ class App extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Padding(
-            padding: EdgeInsets.all(50),
-            child: AutoSizeTextWithBackground(
-              'This\n string\n will bedfsdfs dfasdf asdf asdf asdf '
-                  'This string will be automatically resized to'
-                  'asdf sdf sIsdf sdfs dfsdfs dfaxsdf asd',
-              style: TextStyle(fontSize: 50),
-              minFontSize: 5,
-              backgroundColor: Colors.blue[300],
-              textAlign: TextAlign.center,
-              backgroundRadius: Radius.circular(40),
-              backgroundTextPadding: EdgeInsets.all(20),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(50),
+              child: AutoSizeTextWithBackground(
+                'This\n string\n will bedfsdfs dfasdf asdf asdf asdf '
+                    'This string will be automatically resized to'
+                    'asdf sdf sIsdf sdfs dfsdfs dfaxsdf asd',
+                style: TextStyle(fontSize: 45),
+                minFontSize: 5,
+                maxFontSize: 80,
+                backgroundColor: Colors.blue[300],
+                textAlign: TextAlign.left,
+                backgroundRadius: Radius.circular(10),
+                backgroundTextPadding: EdgeInsets.all(10),
+              ),
             ),
           ),
         ),
