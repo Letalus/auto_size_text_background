@@ -108,7 +108,7 @@ class AutoSizeTextPainter extends CustomPainter {
       final _arcBottomX = _arcBottomOffset.dx;
 
       if (i == 0) {
-        _drawOriginPath(widgetSize, _defaultArcVal, _lineTopY);
+        _moveToOriginPath(widgetSize, _defaultArcVal, _lineTopY);
       }
 
       _backgroundPath.lineTo(_leftX - _arcTopY + _arcTopX, _lineTopY);
@@ -148,7 +148,7 @@ class AutoSizeTextPainter extends CustomPainter {
       final _arcBottomX = _arcBottomOffset.dx;
 
       if (i == 0) {
-        _drawOriginPath(widgetSize, _defaultArcVal, _lineTopY);
+        _moveToOriginPath(widgetSize, _defaultArcVal, _lineTopY);
       }
 
       _backgroundPath.lineTo(_rightX - _arcTopY + _arcTopX, _lineTopY);
@@ -221,7 +221,7 @@ class AutoSizeTextPainter extends CustomPainter {
     return Offset(_arcBottomX, _arcBottomY);
   }
 
-  void _drawOriginPath(Size widgetSize, double _defaultArcVal, double _lineTopY) {
+  void _moveToOriginPath(Size widgetSize, double _defaultArcVal, double _lineTopY) {
     switch (textAlign) {
       case TextAlign.left:
       case TextAlign.start:

@@ -4,7 +4,6 @@ library auto_size_text_background;
 
 import 'dart:async';
 import 'dart:ui';
-
 import 'package:auto_size_text_background/src/auto_size_text_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
