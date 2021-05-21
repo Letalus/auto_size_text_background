@@ -27,6 +27,7 @@ class App extends StatelessWidget {
                       textAlign: TextAlign.left,
                       backgroundRadius: Radius.circular(0),
                       backgroundTextPadding: EdgeInsets.all(0),
+                      backgroundExpandWidth: true,
                     ),
                   ),
                   SizedBox(height: 120,),

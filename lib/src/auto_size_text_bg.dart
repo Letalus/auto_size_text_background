@@ -34,7 +34,8 @@ class AutoSizeTextWithBackground extends StatefulWidget {
         this.semanticsLabel,
         this.backgroundColor,
         this.backgroundRadius,
-        this.backgroundTextPadding
+        this.backgroundTextPadding,
+        this.backgroundExpandWidth = false
       })  : textSpan = null,
         super(key: key);
 
@@ -62,7 +63,8 @@ class AutoSizeTextWithBackground extends StatefulWidget {
         this.semanticsLabel,
         this.backgroundColor,
         this.backgroundRadius,
-        this.backgroundTextPadding
+        this.backgroundTextPadding,
+        this.backgroundExpandWidth = false
       })  : data = null,
         super(key: key);
 
@@ -235,6 +237,10 @@ class AutoSizeTextWithBackground extends StatefulWidget {
   /// Will be ignored if backgroundColor is null
   /// Defaults to EdgeInsets.all(8)
   final EdgeInsets? backgroundTextPadding;
+
+  ///Define if the background should wrap itself to the text or if it should expand to take the entire width
+  ///Defaults to false
+  final bool backgroundExpandWidth;
 
   @override
   _AutoSizeTextState createState() => _AutoSizeTextState();
@@ -491,6 +497,18 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
         textScaleFactor: fontSize / style.fontSize!,
         maxLines: maxLines,
         semanticsLabel: widget.semanticsLabel,
+      );
+    }
+
+    if(widget.backgroundExpandWidth){
+      return Column(
+        children: [
+          Container(
+            color: widget.backgroundColor,
+            padding: widget.backgroundTextPadding,
+            child: text,
+          ),
+        ],
       );
     }
 
