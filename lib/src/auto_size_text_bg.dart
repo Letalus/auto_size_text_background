@@ -501,15 +501,13 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
     }
 
     if(widget.backgroundExpandWidth){
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            color: widget.backgroundColor,
-            padding: widget.backgroundTextPadding,
-            child: text,
-          ),
-        ],
+      return Container(
+        padding: widget.backgroundTextPadding,
+        decoration: BoxDecoration(
+          color: widget.backgroundColor,
+          borderRadius: widget.backgroundRadius!=null?BorderRadius.all(widget.backgroundRadius!):null;
+        ),
+        child: text,
       );
     }
 
