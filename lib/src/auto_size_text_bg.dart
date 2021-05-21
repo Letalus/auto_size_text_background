@@ -502,6 +502,7 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
 
     if(widget.backgroundExpandWidth){
       return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             color: widget.backgroundColor,
