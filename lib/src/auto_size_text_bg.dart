@@ -505,7 +505,7 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
         padding: widget.backgroundTextPadding,
         decoration: BoxDecoration(
           color: widget.backgroundColor,
-          borderRadius: widget.backgroundRadius!=null?BorderRadius.all(widget.backgroundRadius!):null;
+          borderRadius: widget.backgroundRadius!=null?BorderRadius.all(widget.backgroundRadius!):null
         ),
         child: text,
       );
