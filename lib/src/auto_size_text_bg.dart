@@ -444,7 +444,7 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
       wordWrapTextPainter.layout(maxWidth: constraints.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0));
 
       if (wordWrapTextPainter.didExceedMaxLines ||
-          wordWrapTextPainter.width > constraints.maxWidth) {
+          wordWrapTextPainter.width > constraints.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0)) {
         return false;
       }
     }
@@ -462,8 +462,8 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
     textPainter.layout(maxWidth: constraints.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0));
 
     return !(textPainter.didExceedMaxLines ||
-        textPainter.height > constraints.maxHeight ||
-        textPainter.width > constraints.maxWidth);
+        textPainter.height > constraints.maxHeight-(widget.backgroundTextPadding?.top??0)-(widget.backgroundTextPadding?.bottom??0) ||
+        textPainter.width > constraints.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0));
   }
 
   Widget _buildText(double fontSize, TextStyle style, int? maxLines, {List<LineMetrics>? lineMetrics}) {
