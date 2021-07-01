@@ -25,14 +25,17 @@ class App extends StatelessWidget {
                           'a skjdföklas dkfj laöskdfj kjsadf kjasöklfjaskdfljaö'
                           'a skldfjaök jsdfökjaks dfjökakfjakösjdf kasjf ökasjdf'
                           'a skdjföa sjdföjasdkfj aksjfdkasjdf kasöfjaksdfjöak'
-                          'as dfjöaskjdf öklajsdkfasklfjka jsfkajsdfkajskdfj',
+                          'as dfjöaskjdf öklajsdkfasklfjka jsfkajjskdfj'
+                          'asdf jasdkö fskldjf klöasjdfkölas fdj'
+                          'askldfj aksljdfkaösj dfkj',
                       style: TextStyle(fontSize: 60),
                       minFontSize: 5,
                       maxFontSize: 60,
                       backgroundColor: Colors.blue[300],
                       textAlign: TextAlign.center,
                       backgroundRadius: Radius.circular(10),
-                      backgroundTextPadding: EdgeInsets.all(10),
+                      backgroundTextPadding: EdgeInsets.all(30),
+                      backgroundExpandWidth: true,
                     ),
                   ),
                 ],
