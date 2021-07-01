@@ -327,7 +327,7 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
       strutStyle: widget.strutStyle,
     );
 
-    textPainter.layout(maxWidth: size.maxWidth);
+    textPainter.layout(maxWidth: size.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0));
     return textPainter.computeLineMetrics();
   }
 
@@ -441,7 +441,7 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
         strutStyle: widget.strutStyle,
       );
 
-      wordWrapTextPainter.layout(maxWidth: constraints.maxWidth);
+      wordWrapTextPainter.layout(maxWidth: constraints.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0));
 
       if (wordWrapTextPainter.didExceedMaxLines ||
           wordWrapTextPainter.width > constraints.maxWidth) {
@@ -459,7 +459,7 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
       strutStyle: widget.strutStyle,
     );
 
-    textPainter.layout(maxWidth: constraints.maxWidth);
+    textPainter.layout(maxWidth: constraints.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0));
 
     return !(textPainter.didExceedMaxLines ||
         textPainter.height > constraints.maxHeight ||

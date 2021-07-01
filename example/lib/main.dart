@@ -17,32 +17,22 @@ class App extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    flex: 3,
-                    child: AutoSizeTextWithBackground(
-                      'dfsa dfsd2',
-                      style: TextStyle(fontSize: 60, backgroundColor: Colors.red),
-                      minFontSize: 5,
-                      maxFontSize: 60,
-                      backgroundColor: Colors.blue[300],
-                      textAlign: TextAlign.left,
-                      backgroundRadius: Radius.circular(0),
-                      backgroundTextPadding: EdgeInsets.all(0),
-                      backgroundExpandWidth: true,
-                    ),
-                  ),
-                  SizedBox(height: 120,),
-                  Flexible(
                     child: AutoSizeTextWithBackground(
                       'This\n string\n will bedfsdfs dfasdf asdf asdf asdf '
                           'This string will be automatically resized to'
-                          'asdf sdf sIsdf sdfs dfsdfs dfaxsdf asd',
+                          'asdf sdf sIsdf sdfs dfsdfs dfaxsdf asd aksdjf aksjdföka jsdfökj'
+                          'asdjf öaksj dfölkjsdöfk asdk fjaksödjfka jsdkfjksjd fkjs dfklajsdf'
+                          'a skjdföklas dkfj laöskdfj kjsadf kjasöklfjaskdfljaö'
+                          'a skldfjaök jsdfökjaks dfjökakfjakösjdf kasjf ökasjdf'
+                          'a skdjföa sjdföjasdkfj aksjfdkasjdf kasöfjaksdfjöak'
+                          'as dfjöaskjdf öklajsdkfasklfjka jsfkajsdfkajskdfj',
                       style: TextStyle(fontSize: 60),
                       minFontSize: 5,
                       maxFontSize: 60,
                       backgroundColor: Colors.blue[300],
                       textAlign: TextAlign.center,
                       backgroundRadius: Radius.circular(10),
-                      backgroundTextPadding: EdgeInsets.all(2),
+                      backgroundTextPadding: EdgeInsets.all(12),
                     ),
                   ),
                 ],
