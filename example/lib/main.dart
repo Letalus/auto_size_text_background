@@ -32,7 +32,7 @@ class App extends StatelessWidget {
                       backgroundColor: Colors.blue[300],
                       textAlign: TextAlign.center,
                       backgroundRadius: Radius.circular(10),
-                      backgroundTextPadding: EdgeInsets.all(12),
+                      backgroundTextPadding: EdgeInsets.all(10),
                     ),
                   ),
                 ],

@@ -11,61 +11,59 @@ class AutoSizeTextWithBackground extends StatefulWidget {
   ///
   /// If the [style] argument is null, the text will use the style from the
   /// closest enclosing [DefaultTextStyle].
-  const AutoSizeTextWithBackground(
-      String this.data, {
-        Key? key,
-        this.textKey,
-        this.style,
-        this.strutStyle,
-        this.minFontSize = 12,
-        this.maxFontSize = double.infinity,
-        this.stepGranularity = 1,
-        this.presetFontSizes,
-        this.group,
-        this.textAlign,
-        this.textDirection,
-        this.locale,
-        this.softWrap,
-        this.wrapWords = true,
-        this.overflow,
-        this.overflowReplacement,
-        this.textScaleFactor,
-        this.maxLines,
-        this.semanticsLabel,
-        this.backgroundColor,
-        this.backgroundRadius,
-        this.backgroundTextPadding,
-        this.backgroundExpandWidth = false
-      })  : textSpan = null,
+  const AutoSizeTextWithBackground(String this.data,
+      {Key? key,
+      this.textKey,
+      this.style,
+      this.strutStyle,
+      this.minFontSize = 12,
+      this.maxFontSize = double.infinity,
+      this.stepGranularity = 1,
+      this.presetFontSizes,
+      this.group,
+      this.textAlign,
+      this.textDirection,
+      this.locale,
+      this.softWrap,
+      this.wrapWords = true,
+      this.overflow,
+      this.overflowReplacement,
+      this.textScaleFactor,
+      this.maxLines,
+      this.semanticsLabel,
+      this.backgroundColor,
+      this.backgroundRadius,
+      this.backgroundTextPadding,
+      this.backgroundExpandWidth = false})
+      : textSpan = null,
         super(key: key);
 
   /// Creates a [AutoSizeTextWithBackground] widget with a [TextSpan].
-  const AutoSizeTextWithBackground.rich(
-      TextSpan this.textSpan, {
-        Key? key,
-        this.textKey,
-        this.style,
-        this.strutStyle,
-        this.minFontSize = 12,
-        this.maxFontSize = double.infinity,
-        this.stepGranularity = 1,
-        this.presetFontSizes,
-        this.group,
-        this.textAlign,
-        this.textDirection,
-        this.locale,
-        this.softWrap,
-        this.wrapWords = true,
-        this.overflow,
-        this.overflowReplacement,
-        this.textScaleFactor,
-        this.maxLines,
-        this.semanticsLabel,
-        this.backgroundColor,
-        this.backgroundRadius,
-        this.backgroundTextPadding,
-        this.backgroundExpandWidth = false
-      })  : data = null,
+  const AutoSizeTextWithBackground.rich(TextSpan this.textSpan,
+      {Key? key,
+      this.textKey,
+      this.style,
+      this.strutStyle,
+      this.minFontSize = 12,
+      this.maxFontSize = double.infinity,
+      this.stepGranularity = 1,
+      this.presetFontSizes,
+      this.group,
+      this.textAlign,
+      this.textDirection,
+      this.locale,
+      this.softWrap,
+      this.wrapWords = true,
+      this.overflow,
+      this.overflowReplacement,
+      this.textScaleFactor,
+      this.maxLines,
+      this.semanticsLabel,
+      this.backgroundColor,
+      this.backgroundRadius,
+      this.backgroundTextPadding,
+      this.backgroundExpandWidth = false})
+      : data = null,
         super(key: key);
 
   /// Sets the key for the resulting [Text] widget.
@@ -267,6 +265,15 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, size) {
+
+      //Adjusting the constraints, so the text will be calculated correctly
+      final _newMaxWidth =
+          size.maxWidth + (widget.backgroundTextPadding?.left ?? 0) - (widget.backgroundTextPadding?.right ?? 0);
+      final _newMaxHeight =
+          size.maxHeight + (widget.backgroundTextPadding?.top ?? 0) - (widget.backgroundTextPadding?.bottom ?? 0);
+
+      size = size.copyWith(
+          minWidth: size.minWidth, maxWidth: _newMaxWidth, minHeight: size.minHeight, maxHeight: _newMaxHeight);
       final defaultTextStyle = DefaultTextStyle.of(context);
 
       var style = widget.style;
@@ -310,12 +317,11 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
     final userScale = widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
 
     final span = TextSpan(
-      style: style as TextStyle,
-      text: widget.textSpan?.text ?? widget.data,
-      children: widget.textSpan?.children,
-      recognizer: widget.textSpan?.recognizer,
-      semanticsLabel: widget.semanticsLabel
-    );
+        style: style as TextStyle,
+        text: widget.textSpan?.text ?? widget.data,
+        children: widget.textSpan?.children,
+        recognizer: widget.textSpan?.recognizer,
+        semanticsLabel: widget.semanticsLabel);
 
     final textPainter = TextPainter(
       text: span,
@@ -327,42 +333,36 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
       strutStyle: widget.strutStyle,
     );
 
-    textPainter.layout(maxWidth: size.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0));
+    textPainter.layout(maxWidth: size.maxWidth);
     return textPainter.computeLineMetrics();
   }
 
   void _validateProperties(TextStyle style, int? maxLines) {
     assert(widget.overflow == null || widget.overflowReplacement == null,
-    'Either overflow or overflowReplacement must be null.');
-    assert(maxLines == null || maxLines > 0,
-    'MaxLines must be greater than or equal to 1.');
-    assert(widget.key == null || widget.key != widget.textKey,
-    'Key and textKey must not be equal.');
+        'Either overflow or overflowReplacement must be null.');
+    assert(maxLines == null || maxLines > 0, 'MaxLines must be greater than or equal to 1.');
+    assert(widget.key == null || widget.key != widget.textKey, 'Key and textKey must not be equal.');
 
     if (widget.presetFontSizes == null) {
       assert(
-      widget.stepGranularity >= 0.1,
-      'StepGranularity must be greater than or equal to 0.1. It is not a '
+          widget.stepGranularity >= 0.1,
+          'StepGranularity must be greater than or equal to 0.1. It is not a '
           'good idea to resize the font with a higher accuracy.');
-      assert(widget.minFontSize >= 0,
-      'MinFontSize must be greater than or equal to 0.');
+      assert(widget.minFontSize >= 0, 'MinFontSize must be greater than or equal to 0.');
       assert(widget.maxFontSize > 0, 'MaxFontSize has to be greater than 0.');
-      assert(widget.minFontSize <= widget.maxFontSize,
-      'MinFontSize must be smaller or equal than maxFontSize.');
-      assert(widget.minFontSize / widget.stepGranularity % 1 == 0,
-      'MinFontSize must be a multiple of stepGranularity.');
+      assert(widget.minFontSize <= widget.maxFontSize, 'MinFontSize must be smaller or equal than maxFontSize.');
+      assert(
+          widget.minFontSize / widget.stepGranularity % 1 == 0, 'MinFontSize must be a multiple of stepGranularity.');
       if (widget.maxFontSize != double.infinity) {
-        assert(widget.maxFontSize / widget.stepGranularity % 1 == 0,
-        'MaxFontSize must be a multiple of stepGranularity.');
+        assert(
+            widget.maxFontSize / widget.stepGranularity % 1 == 0, 'MaxFontSize must be a multiple of stepGranularity.');
       }
     } else {
-      assert(widget.presetFontSizes!.isNotEmpty,
-      'PresetFontSizes must not be empty.');
+      assert(widget.presetFontSizes!.isNotEmpty, 'PresetFontSizes must not be empty.');
     }
   }
 
-  List _calculateFontSize(
-      BoxConstraints size, TextStyle? style, int? maxLines) {
+  List _calculateFontSize(BoxConstraints size, TextStyle? style, int? maxLines) {
     final span = TextSpan(
       style: widget.textSpan?.style ?? style,
       text: widget.textSpan?.text ?? widget.data,
@@ -370,16 +370,14 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
       recognizer: widget.textSpan?.recognizer,
     );
 
-    final userScale =
-        widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
+    final userScale = widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
 
     int left;
     int right;
 
     final presetFontSizes = widget.presetFontSizes?.reversed.toList();
     if (presetFontSizes == null) {
-      final num defaultFontSize =
-      style!.fontSize!.clamp(widget.minFontSize, widget.maxFontSize);
+      final num defaultFontSize = style!.fontSize!.clamp(widget.minFontSize, widget.maxFontSize);
       final defaultScale = defaultFontSize * userScale / style.fontSize!;
       if (_checkTextFits(span, defaultScale, maxLines, size)) {
         return <Object>[defaultFontSize * userScale, true];
@@ -423,8 +421,7 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
     return <Object>[fontSize, lastValueFits];
   }
 
-  bool _checkTextFits(
-      TextSpan text, double scale, int? maxLines, BoxConstraints constraints) {
+  bool _checkTextFits(TextSpan text, double scale, int? maxLines, BoxConstraints constraints) {
     if (!widget.wrapWords) {
       final words = text.toPlainText().split(RegExp('\\s+'));
 
@@ -441,10 +438,9 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
         strutStyle: widget.strutStyle,
       );
 
-      wordWrapTextPainter.layout(maxWidth: constraints.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0));
+      wordWrapTextPainter.layout(maxWidth: constraints.maxWidth);
 
-      if (wordWrapTextPainter.didExceedMaxLines ||
-          wordWrapTextPainter.width > constraints.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0)) {
+      if (wordWrapTextPainter.didExceedMaxLines || wordWrapTextPainter.width > constraints.maxWidth) {
         return false;
       }
     }
@@ -459,11 +455,11 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
       strutStyle: widget.strutStyle,
     );
 
-    textPainter.layout(maxWidth: constraints.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0));
+    textPainter.layout(maxWidth: constraints.maxWidth);
 
     return !(textPainter.didExceedMaxLines ||
-        textPainter.height > constraints.maxHeight-(widget.backgroundTextPadding?.top??0)-(widget.backgroundTextPadding?.bottom??0) ||
-        textPainter.width > constraints.maxWidth-(widget.backgroundTextPadding?.left??0)-(widget.backgroundTextPadding?.right??0));
+        textPainter.height > constraints.maxHeight ||
+        textPainter.width > constraints.maxWidth);
   }
 
   Widget _buildText(double fontSize, TextStyle style, int? maxLines, {List<LineMetrics>? lineMetrics}) {
@@ -500,17 +496,15 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
       );
     }
 
-    if(widget.backgroundExpandWidth){
+    if (widget.backgroundExpandWidth) {
       return Container(
         padding: widget.backgroundTextPadding,
         decoration: BoxDecoration(
-          color: widget.backgroundColor,
-          borderRadius: widget.backgroundRadius!=null?BorderRadius.all(widget.backgroundRadius!):null
-        ),
+            color: widget.backgroundColor,
+            borderRadius: widget.backgroundRadius != null ? BorderRadius.all(widget.backgroundRadius!) : null),
         child: text,
       );
     }
-
 
     if (widget.backgroundColor != null && lineMetrics != null) {
       return CustomPaint(
@@ -519,8 +513,7 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
             backgroundColor: widget.backgroundColor!,
             padding: widget.backgroundTextPadding ?? const EdgeInsets.all(8),
             radius: widget.backgroundRadius ?? const Radius.circular(20),
-            textAlign: widget.textAlign??TextAlign.center
-        ),
+            textAlign: widget.textAlign ?? TextAlign.center),
         child: text,
       );
     }
