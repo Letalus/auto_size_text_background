@@ -264,16 +264,17 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, size) {
+
+    final layout =  LayoutBuilder(builder: (context, size) {
 
       //Adjusting the constraints, so the text will be calculated correctly
-      final _newMaxWidth =
+     /* final _newMaxWidth =
           size.maxWidth - (widget.backgroundTextPadding?.left ?? 0) - (widget.backgroundTextPadding?.right ?? 0);
       final _newMaxHeight =
           size.maxHeight - (widget.backgroundTextPadding?.top ?? 0) - (widget.backgroundTextPadding?.bottom ?? 0);
 
       size = size.copyWith(
-          minWidth: size.minWidth, maxWidth: _newMaxWidth, minHeight: size.minHeight, maxHeight: _newMaxHeight);
+          minWidth: size.minWidth, maxWidth: _newMaxWidth, minHeight: size.minHeight, maxHeight: _newMaxHeight);*/
       final defaultTextStyle = DefaultTextStyle.of(context);
 
       var style = widget.style;
@@ -311,6 +312,18 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
         return text;
       }
     });
+
+    if (widget.backgroundExpandWidth) {
+      return Container(
+        padding: widget.backgroundTextPadding,
+        decoration: BoxDecoration(
+            color: widget.backgroundColor,
+            borderRadius: widget.backgroundRadius != null ? BorderRadius.all(widget.backgroundRadius!) : null),
+        child: layout,
+      );
+    }
+
+    return layout;
   }
 
   List<LineMetrics> _calculateLineMetric(BoxConstraints size, TextStyle? style, int? maxLines) {
@@ -506,7 +519,7 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
       );
     }
 
-    if (widget.backgroundColor != null && lineMetrics != null) {
+    if ((widget.backgroundColor != null && lineMetrics != null)&&!widget.backgroundExpandWidth) {
       return CustomPaint(
         painter: AutoSizeTextPainter(
             lineMetrics: lineMetrics,
