@@ -268,13 +268,16 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
     final layout =  LayoutBuilder(builder: (context, size) {
 
       //Adjusting the constraints, so the text will be calculated correctly
-      final _newMaxWidth =
-          size.maxWidth - (widget.backgroundTextPadding?.left ?? 0) - (widget.backgroundTextPadding?.right ?? 0);
-      final _newMaxHeight =
-          size.maxHeight - (widget.backgroundTextPadding?.top ?? 0) - (widget.backgroundTextPadding?.bottom ?? 0);
+      if(widget.backgroundExpandWidth){
+        final _newMaxWidth =
+            size.maxWidth - (widget.backgroundTextPadding?.left ?? 0) - (widget.backgroundTextPadding?.right ?? 0);
+        final _newMaxHeight =
+            size.maxHeight - (widget.backgroundTextPadding?.top ?? 0) - (widget.backgroundTextPadding?.bottom ?? 0);
 
-      size = size.copyWith(
-          minWidth: size.minWidth, maxWidth: _newMaxWidth, minHeight: size.minHeight, maxHeight: _newMaxHeight);
+        size = size.copyWith(
+            minWidth: size.minWidth, maxWidth: _newMaxWidth, minHeight: size.minHeight, maxHeight: _newMaxHeight);
+      }
+
       final defaultTextStyle = DefaultTextStyle.of(context);
 
       var style = widget.style;
