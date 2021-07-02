@@ -268,13 +268,13 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
     final layout =  LayoutBuilder(builder: (context, size) {
 
       //Adjusting the constraints, so the text will be calculated correctly
-     /* final _newMaxWidth =
+      final _newMaxWidth =
           size.maxWidth - (widget.backgroundTextPadding?.left ?? 0) - (widget.backgroundTextPadding?.right ?? 0);
       final _newMaxHeight =
           size.maxHeight - (widget.backgroundTextPadding?.top ?? 0) - (widget.backgroundTextPadding?.bottom ?? 0);
 
       size = size.copyWith(
-          minWidth: size.minWidth, maxWidth: _newMaxWidth, minHeight: size.minHeight, maxHeight: _newMaxHeight);*/
+          minWidth: size.minWidth, maxWidth: _newMaxWidth, minHeight: size.minHeight, maxHeight: _newMaxHeight);
       final defaultTextStyle = DefaultTextStyle.of(context);
 
       var style = widget.style;
@@ -506,16 +506,6 @@ class _AutoSizeTextState extends State<AutoSizeTextWithBackground> {
         textScaleFactor: fontSize / style.fontSize!,
         maxLines: maxLines,
         semanticsLabel: widget.semanticsLabel,
-      );
-    }
-
-    if (widget.backgroundExpandWidth) {
-      return Container(
-        padding: widget.backgroundTextPadding,
-        decoration: BoxDecoration(
-            color: widget.backgroundColor,
-            borderRadius: widget.backgroundRadius != null ? BorderRadius.all(widget.backgroundRadius!) : null),
-        child: text,
       );
     }
 
